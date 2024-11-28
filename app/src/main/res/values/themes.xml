@@ -1,4 +1,4 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <!-- Base application theme. -->
     <style name="Base.Theme.GiveAwayApp" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
@@ -6,4 +6,16 @@
     </style>
 
     <style name="Theme.GiveAwayApp" parent="Base.Theme.GiveAwayApp" />
+
+    <style name="Widget.App.Button" parent="Widget.Material3.Button">
+        <item name="layout_constraintWidth_max">300dp</item>
+        <item name="rippleColor">?attr/colorPrimarySurface</item>
+
+    </style>
+
+    <style name="Widget.App.TextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="layout_constraintWidth_max">350dp</item>
+        <item name="boxBackgroundColor">?attr/colorOnPrimary</item>
+    </style>
+
 </resources>
