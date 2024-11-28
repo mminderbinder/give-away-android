@@ -4,16 +4,16 @@ import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.example.giveawayapp.databinding.ActivityMainBinding
+import com.example.giveawayapp.databinding.ActivityProfileBinding
 
-class MainActivity : BottomNavigationActivity()
+class ProfileActivity : BottomNavigationActivity()
 {
-    private lateinit var binding: ActivityMainBinding
+    private lateinit var binding: ActivityProfileBinding
     override fun onCreate(savedInstanceState: Bundle?)
     {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        binding = ActivityMainBinding.inflate(layoutInflater)
+        binding = ActivityProfileBinding.inflate(layoutInflater)
         setContentView(binding.root)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -22,8 +22,7 @@ class MainActivity : BottomNavigationActivity()
         }
 
         with(binding) {
-
-            setUpBottomNavigation(bottomNavigation, R.id.navigation_home)
+            setUpBottomNavigation(bottomNavigation, R.id.navigation_profile)
         }
     }
 }

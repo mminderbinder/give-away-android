@@ -44,8 +44,7 @@ class LoginActivity : AppCompatActivity()
             }
 
             textViewRegister.setOnClickListener {
-                val intent = Intent(this@LoginActivity, RegistrationActivity::class.java)
-                startActivity(intent)
+                startActivity(Intent(this@LoginActivity, RegistrationActivity::class.java))
             }
         }
     }

@@ -81,8 +81,7 @@ class RegistrationActivity : AppCompatActivity()
                     "Registration successful!",
                     Toast.LENGTH_SHORT
                 ).show()
-                val intent = Intent(this@RegistrationActivity, LoginActivity::class.java)
-                startActivity(intent)
+                startActivity(Intent(this@RegistrationActivity, LoginActivity::class.java))
             }
             else
             {
