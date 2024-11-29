@@ -12,6 +12,6 @@ data class Item(
     val description: String,
     val imageUrl: String,
     val location: String,
-    val status: Boolean,
+    val status: Boolean = false,
     val userId: String
 )

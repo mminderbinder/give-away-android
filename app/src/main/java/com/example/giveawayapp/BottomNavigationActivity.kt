@@ -29,9 +29,9 @@ open class BottomNavigationActivity : AppCompatActivity()
 
                 R.id.navigation_search ->
                 {
-                    if (this !is SearchItemsActivity)
+                    if (this !is ItemDetailsActivity)
                     {
-                        startActivity(Intent(this, SearchItemsActivity::class.java))
+                        startActivity(Intent(this, ItemDetailsActivity::class.java))
                         finish()
                     }
                     true

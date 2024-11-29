@@ -6,7 +6,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.giveawayapp.databinding.ActivitySearchItemsBinding
 
-class SearchItemsActivity : BottomNavigationActivity()
+class ItemDetailsActivity : BottomNavigationActivity()
 {
     private lateinit var binding: ActivitySearchItemsBinding
     override fun onCreate(savedInstanceState: Bundle?)

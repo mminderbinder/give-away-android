@@ -19,7 +19,7 @@
             android:name=".ProfileActivity"
             android:exported="false" />
         <activity
-            android:name=".SearchItemsActivity"
+            android:name=".ItemDetailsActivity"
             android:exported="false" />
         <activity
             android:name=".RegistrationActivity"

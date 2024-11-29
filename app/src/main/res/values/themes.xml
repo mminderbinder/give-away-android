@@ -1,6 +1,6 @@
 <resources>
     <!-- Base application theme. -->
-    <style name="Base.Theme.GiveAwayApp" parent="Theme.Material3.DayNight.NoActionBar">
+    <style name="Base.Theme.GiveAwayApp" parent="Theme.Material3.Dark.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
     </style>
@@ -15,7 +15,7 @@
 
     <style name="Widget.App.TextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <item name="layout_constraintWidth_max">350dp</item>
-        <item name="boxBackgroundColor">?attr/colorOnPrimary</item>
+        <item name="boxBackgroundColor">#252629</item>
     </style>
 
 </resources>
