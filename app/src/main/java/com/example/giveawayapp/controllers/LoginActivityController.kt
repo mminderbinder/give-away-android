@@ -32,7 +32,5 @@ class LoginActivityController(
         val digest = MessageDigest.getInstance("SHA-256")
         val hashedBytes = digest.digest(password.toByteArray())
         return hashedBytes.joinToString("") { "%02x".format(it) }
-
-
     }
 }
