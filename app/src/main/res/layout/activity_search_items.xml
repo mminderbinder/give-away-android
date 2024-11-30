@@ -14,10 +14,7 @@
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layout_behavior="@string/searchbar_scrolling_view_behavior">
-
-
-        </androidx.core.widget.NestedScrollView>
+            app:layout_behavior="@string/searchbar_scrolling_view_behavior"></androidx.core.widget.NestedScrollView>
 
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"

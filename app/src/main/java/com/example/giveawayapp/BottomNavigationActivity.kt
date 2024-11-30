@@ -7,7 +7,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 
 open class BottomNavigationActivity : AppCompatActivity()
 {
-
     protected fun setUpBottomNavigation(
         bottomNavigationView: BottomNavigationView,
         selectedItemId: Int,

@@ -1,17 +1,24 @@
 package com.example.giveawayapp
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.lifecycleScope
+import com.example.giveawayapp.controllers.MyItemsActivityController
+import com.example.giveawayapp.data.AppDatabase
 import com.example.giveawayapp.databinding.ActivityMyItemsBinding
+import kotlinx.coroutines.launch
 
 class MyItemsActivity : BottomNavigationActivity()
 {
     private lateinit var binding: ActivityMyItemsBinding
     private var selectedCategory: String? = null
+    private lateinit var myItemsActivityController: MyItemsActivityController
+
     override fun onCreate(savedInstanceState: Bundle?)
     {
         super.onCreate(savedInstanceState)
@@ -24,13 +31,15 @@ class MyItemsActivity : BottomNavigationActivity()
             insets
         }
 
-
         with(binding) {
 
             val sharedPreferences = getSharedPreferences(
                 "user_prefs",
                 MODE_PRIVATE
             )
+
+            val itemDAO = AppDatabase.getDatabase(this@MyItemsActivity).itemDao()
+            myItemsActivityController = MyItemsActivityController(itemDAO)
             setUpBottomNavigation(bottomNavigation, R.id.navigation_items, sharedPreferences)
 
             val dropdownCategoryMenu = dropdownCategory
@@ -56,8 +65,42 @@ class MyItemsActivity : BottomNavigationActivity()
                 val title = editTextTitle.text.toString().trim()
                 val location = editTextLocation.text.toString().trim()
                 val description = editTextDescription.text.toString().trim()
+                val userId = sharedPreferences.getInt("USER_ID", -1)
 
-                validateInputs(title, location, description)
+                createItem(title, location, description, userId)
+            }
+        }
+    }
+
+    private fun createItem(title: String, location: String, description: String, userId: Int)
+    {
+        lifecycleScope.launch {
+            if (!validateInputs(title, location, description))
+            {
+                return@launch
+            }
+
+            val success = myItemsActivityController.addItem(
+                title = title,
+                itemCategory = selectedCategory,
+                description = description,
+                location = location,
+                userId = userId
+            )
+            if (success)
+            {
+                startActivity(Intent(this@MyItemsActivity, MainActivity::class.java))
+                finish()
+                Toast.makeText(this@MyItemsActivity, "Item added successfully", Toast.LENGTH_SHORT)
+                    .show()
+            }
+            else
+            {
+                Toast.makeText(
+                    this@MyItemsActivity,
+                    "Item failed to add. Please try again",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         }
     }

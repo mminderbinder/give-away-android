@@ -10,8 +10,8 @@ data class Item(
     val itemCategory: ItemCategory,
     val title: String,
     val description: String,
-    val imageUrl: String,
+    val userId: Int,
+    val imageUrl: String = "",
     val location: String,
     val status: Boolean = false,
-    val userId: String
 )
