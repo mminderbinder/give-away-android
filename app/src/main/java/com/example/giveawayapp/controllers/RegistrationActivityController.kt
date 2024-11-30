@@ -1,12 +1,14 @@
 package com.example.giveawayapp.controllers
 
+import android.content.SharedPreferences
 import android.util.Log
 import com.example.giveawayapp.data.UserDAO
 import com.example.giveawayapp.models.User
 import java.security.MessageDigest
 
 class RegistrationActivityController(
-    private val userDAO: UserDAO
+    private val userDAO: UserDAO,
+    private val sharedPreferences: SharedPreferences
 )
 {
     suspend fun registerUser(username: String, email: String, password: String): Boolean
@@ -20,7 +22,13 @@ class RegistrationActivityController(
                 email = email,
                 password = hashedPassword
             )
-            userDAO.insert(newUser)
+
+            val newUserId = userDAO.insert(newUser).toInt()
+
+            sharedPreferences.edit()
+                .putInt("USER_ID", newUserId)
+                .apply()
+
             Log.d(TAG, "registerUser:success")
             true
         }

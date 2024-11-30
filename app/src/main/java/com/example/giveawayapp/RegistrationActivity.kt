@@ -1,6 +1,7 @@
 package com.example.giveawayapp
 
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -17,6 +18,7 @@ class RegistrationActivity : AppCompatActivity()
 {
     private lateinit var binding: ActivityRegistrationBinding
     private lateinit var registrationActivityController: RegistrationActivityController
+    private lateinit var sharedPreferences: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?)
     {
@@ -31,7 +33,11 @@ class RegistrationActivity : AppCompatActivity()
         }
 
         val userDAO = AppDatabase.getDatabase(this).userDao()
-        registrationActivityController = RegistrationActivityController(userDAO)
+
+        sharedPreferences =
+            getSharedPreferences("user_prefs", MODE_PRIVATE)
+
+        registrationActivityController = RegistrationActivityController(userDAO, sharedPreferences)
 
         with(binding) {
             toolbar.setNavigationOnClickListener {

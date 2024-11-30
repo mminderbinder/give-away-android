@@ -1,6 +1,7 @@
 package com.example.giveawayapp
 
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
@@ -9,7 +10,8 @@ open class BottomNavigationActivity : AppCompatActivity()
 
     protected fun setUpBottomNavigation(
         bottomNavigationView: BottomNavigationView,
-        selectedItemId: Int
+        selectedItemId: Int,
+        sharedPreferences: SharedPreferences
     )
     {
         bottomNavigationView.selectedItemId = selectedItemId
@@ -54,6 +56,15 @@ open class BottomNavigationActivity : AppCompatActivity()
                         startActivity(Intent(this, ProfileActivity::class.java))
                         finish()
                     }
+                    true
+                }
+
+                R.id.navigation_logout ->
+                {
+                    startActivity(Intent(this, LoginActivity::class.java))
+                    sharedPreferences.edit()
+                        .remove("USER_ID")
+                        .apply()
                     true
                 }
 

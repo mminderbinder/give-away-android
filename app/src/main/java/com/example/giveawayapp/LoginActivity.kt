@@ -1,6 +1,7 @@
 package com.example.giveawayapp
 
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -17,7 +18,7 @@ class LoginActivity : AppCompatActivity()
 {
     private lateinit var binding: ActivityLoginBinding
     private lateinit var loginActivityController: LoginActivityController
-
+    private lateinit var sharedPreferences: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?)
     {
@@ -32,7 +33,13 @@ class LoginActivity : AppCompatActivity()
         }
 
         val userDao = AppDatabase.getDatabase(this).userDao()
-        loginActivityController = LoginActivityController(userDao)
+
+        // TODO: Centralize initialization
+        sharedPreferences =
+            getSharedPreferences("user_prefs", MODE_PRIVATE)
+
+        loginActivityController = LoginActivityController(userDao, sharedPreferences)
+        isUserLoggedIn()
 
         with(binding) {
             buttonLogin.setOnClickListener {
@@ -88,6 +95,17 @@ class LoginActivity : AppCompatActivity()
             }
 
             else -> true
+        }
+    }
+
+    private fun isUserLoggedIn()
+    {
+        val userId = sharedPreferences.getInt("USER_ID", -1)
+
+        if (userId != -1)
+        {
+            startActivity(Intent(this, MainActivity::class.java))
+            return
         }
     }
 }

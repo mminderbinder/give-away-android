@@ -22,7 +22,13 @@ class ItemDetailsActivity : BottomNavigationActivity()
         }
 
         with(binding) {
-            setUpBottomNavigation(bottomNavigation, R.id.navigation_search)
+
+            // TODO: Centralize initialization
+            val sharedPreferences = getSharedPreferences(
+                "user_prefs",
+                MODE_PRIVATE
+            )
+            setUpBottomNavigation(bottomNavigation, R.id.navigation_search, sharedPreferences)
         }
     }
 }

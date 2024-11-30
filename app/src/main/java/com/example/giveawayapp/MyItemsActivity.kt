@@ -24,8 +24,14 @@ class MyItemsActivity : BottomNavigationActivity()
             insets
         }
 
+
         with(binding) {
-            setUpBottomNavigation(bottomNavigation, R.id.navigation_items)
+
+            val sharedPreferences = getSharedPreferences(
+                "user_prefs",
+                MODE_PRIVATE
+            )
+            setUpBottomNavigation(bottomNavigation, R.id.navigation_items, sharedPreferences)
 
             val dropdownCategoryMenu = dropdownCategory
 
@@ -70,5 +76,4 @@ class MyItemsActivity : BottomNavigationActivity()
             else -> true
         }
     }
-
 }

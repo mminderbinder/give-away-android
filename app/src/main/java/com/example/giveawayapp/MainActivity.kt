@@ -23,7 +23,13 @@ class MainActivity : BottomNavigationActivity()
 
         with(binding) {
 
-            setUpBottomNavigation(bottomNavigation, R.id.navigation_home)
+            // TODO: Centralize initialization
+            val sharedPreferences = getSharedPreferences(
+                "user_prefs",
+                MODE_PRIVATE
+            )
+
+            setUpBottomNavigation(bottomNavigation, R.id.navigation_home, sharedPreferences)
         }
     }
 }

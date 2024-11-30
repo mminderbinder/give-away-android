@@ -11,7 +11,7 @@ import com.example.giveawayapp.utils.ItemCategoryConverter
 
 @Database(
     entities = [User::class, Item::class],
-    version = 2,
+    version = 4
 )
 @TypeConverters(ItemCategoryConverter::class)
 abstract class AppDatabase : RoomDatabase()

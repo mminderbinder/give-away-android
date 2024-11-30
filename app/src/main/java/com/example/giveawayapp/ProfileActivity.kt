@@ -22,7 +22,11 @@ class ProfileActivity : BottomNavigationActivity()
         }
 
         with(binding) {
-            setUpBottomNavigation(bottomNavigation, R.id.navigation_profile)
+            val sharedPreferences = getSharedPreferences(
+                "user_prefs",
+                MODE_PRIVATE
+            )
+            setUpBottomNavigation(bottomNavigation, R.id.navigation_profile, sharedPreferences)
         }
     }
 }
