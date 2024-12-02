@@ -8,7 +8,7 @@ class ItemDetailsActivityController(
     private val itemDAO: ItemDAO
 )
 {
-    suspend fun getItemList(userId: Int): List<Item>
+    suspend fun getItemList(userId: Int): List<Item>?
     {
         return try
         {
@@ -18,8 +18,8 @@ class ItemDetailsActivityController(
         }
         catch (e: Exception)
         {
-            Log.e(TAG, "getItemList:failure", e)
-            emptyList()
+            Log.e(TAG, "getItemList: failed to get item list for user with userId: $userId", e)
+            null
         }
     }
 

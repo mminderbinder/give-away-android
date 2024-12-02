@@ -2,6 +2,7 @@ package com.example.giveawayapp
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -34,6 +35,8 @@ class ItemDetailsActivity : BottomNavigationActivity()
 
         controller = ItemDetailsActivityController(itemDAO)
 
+        val sharedPreferences = getSharedPreferences("user_prefs", MODE_PRIVATE)
+
         setUpAdapter()
 
         with(binding) {
@@ -41,7 +44,7 @@ class ItemDetailsActivity : BottomNavigationActivity()
             setUpBottomNavigation(
                 bottomNavigation,
                 R.id.navigation_search,
-                getSharedPreferences("user_prefs", MODE_PRIVATE)
+                sharedPreferences
             )
             itemRecyclerView.adapter = adapter
             itemRecyclerView.layoutManager = LinearLayoutManager(this@ItemDetailsActivity)
@@ -69,7 +72,18 @@ class ItemDetailsActivity : BottomNavigationActivity()
 
             val userId = getSharedPreferences("user_prefs", MODE_PRIVATE).getInt("USER_ID", -1)
             val itemsList = controller.getItemList(userId)
-            adapter.getItemList(itemsList)
+            if (itemsList != null)
+            {
+                adapter.getItemList(itemsList)
+            }
+            else
+            {
+                Toast.makeText(
+                    this@ItemDetailsActivity,
+                    "Failed to retrieve items. Please try again later",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
         }
     }
 }
