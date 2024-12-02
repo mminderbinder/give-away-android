@@ -15,6 +15,9 @@
         android:theme="@style/Theme.GiveAwayApp"
         tools:targetApi="31">
         <activity
+            android:name=".FullScreenImageActivity"
+            android:exported="false" />
+        <activity
             android:name=".EditItemActivity"
             android:exported="false" />
         <activity

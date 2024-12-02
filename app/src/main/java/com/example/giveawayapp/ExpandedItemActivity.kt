@@ -1,5 +1,6 @@
 package com.example.giveawayapp
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -72,7 +73,6 @@ class ExpandedItemActivity : BottomNavigationActivity()
         }
     }
 
-
     private fun getSelectedItemInfo(item: Item)
     {
         with(binding) {
@@ -88,6 +88,17 @@ class ExpandedItemActivity : BottomNavigationActivity()
                 .load(item.imageUrl)
                 .error(R.drawable.baseline_broken_image_24)
                 .into(imageViewItemImage)
+
+            setUpFullScreenImage(item)
+
+        }
+    }
+    private fun setUpFullScreenImage(item: Item) {
+
+        binding.imageViewItemImage.setOnClickListener {
+            val intent = Intent(this, FullScreenImageActivity::class.java)
+            intent.putExtra("imageUrl", item.imageUrl)
+            startActivity(intent)
         }
     }
 }
