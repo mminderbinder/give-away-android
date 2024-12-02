@@ -46,7 +46,7 @@
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textLayoutLocation"
             style="@style/Widget.App.TextInputLayout"
-            android:layout_width="0dp"
+            android:layout_width="350dp"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toTopOf="@+id/textLayoutDescription"
             app:layout_constraintEnd_toEndOf="parent"
@@ -62,12 +62,13 @@
                 android:inputType="text" />
         </com.google.android.material.textfield.TextInputLayout>
 
+
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textLayoutDescription"
             style="@style/Widget.App.TextInputLayout"
-            android:layout_width="0dp"
+            android:layout_width="350dp"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toTopOf="@+id/textLayoutCategory"
+            app:layout_constraintBottom_toTopOf="@+id/textLayoutImageUrl"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
@@ -86,17 +87,37 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textLayoutCategory"
-            style="@style/Widget.Material3.TextInputLayout.FilledBox.ExposedDropdownMenu"
-            android:layout_width="0dp"
+            android:id="@+id/textLayoutImageUrl"
+            style="@style/Widget.App.TextInputLayout"
+            android:layout_width="350dp"
             android:layout_height="wrap_content"
-            android:hint="Choose Category"
-            app:layout_constraintWidth_max="350dp"
-            app:layout_constraintBottom_toTopOf="@+id/buttonSubmit"
+            app:layout_constraintBottom_toTopOf="@+id/textLayoutCategory"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textLayoutDescription">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editTextImageUrl"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Add an Image URL (temporary)">
+
+            </com.google.android.material.textfield.TextInputEditText>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textLayoutCategory"
+            style="@style/Widget.Material3.TextInputLayout.FilledBox.ExposedDropdownMenu"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:hint="Choose Category"
+            app:layout_constraintBottom_toTopOf="@+id/buttonSubmit"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textLayoutImageUrl">
 
             <com.google.android.material.textfield.MaterialAutoCompleteTextView
                 android:id="@+id/dropdownCategory"
@@ -108,7 +129,7 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/buttonSubmit"
             style="@style/Widget.App.Button"
-            android:layout_width="0dp"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:text="Submit"
             app:layout_constraintBottom_toTopOf="@+id/bottomNavigation"

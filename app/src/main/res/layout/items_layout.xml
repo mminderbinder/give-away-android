@@ -9,7 +9,7 @@
     app:strokeColor="#a8a8a9"
     app:strokeWidth="2dp"
     android:layout_marginBottom="12dp"
-    app:contentPadding="24dp">
+    app:contentPadding="16dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -26,27 +26,45 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.75"/>
+
+        <ImageView
+            android:id="@+id/imageViewItem"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:contentDescription="Item image"
+            android:src="@drawable/baseline_add_24"
+            app:layout_constraintTop_toBottomOf="@id/textViewTitle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/guideline" />
+
         <TextView
             android:id="@+id/textViewCategory"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
             android:text="Headphones"
+            android:ellipsize="end"
             android:textAppearance="@style/TextAppearance.Material3.TitleSmall"
             app:layout_constraintTop_toBottomOf="@id/textViewTitle"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="@id/guideline" />
 
         <TextView
             android:id="@+id/textViewDate"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="Nov 3 2024"
             android:layout_marginTop="4dp"
             android:textAppearance="@style/TextAppearance.Material3.TitleSmall"
             app:layout_constraintTop_toBottomOf="@id/textViewCategory"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="@id/guideline" />
 
         <ImageView
             android:id="@+id/imageViewLocationIcon"
@@ -55,7 +73,8 @@
             android:layout_marginTop="4dp"
             android:src="@drawable/baseline_location_pin_24"
             app:layout_constraintTop_toBottomOf="@id/textViewDate"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/textViewDescriptionContent" />
 
         <TextView
             android:id="@+id/textViewLocation"
@@ -63,10 +82,12 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginStart="4dp"
+            android:ellipsize="end"
             android:text="Location"
             android:textAppearance="@style/TextAppearance.Material3.TitleSmall"
             app:layout_constraintTop_toBottomOf="@id/textViewDate"
-            app:layout_constraintStart_toEndOf="@id/imageViewLocationIcon" />
+            app:layout_constraintStart_toEndOf="@id/imageViewLocationIcon"
+            app:layout_constraintBottom_toTopOf="@id/textViewDescriptionContent" />
 
         <TextView
             android:id="@+id/textViewDescriptionContent"
@@ -77,7 +98,7 @@
             android:layout_marginTop="12dp"
             android:text="Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley"
             android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
-            app:layout_constraintTop_toBottomOf="@id/textViewLocation"
+            app:layout_constraintTop_toBottomOf="@id/imageViewItem"
             app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

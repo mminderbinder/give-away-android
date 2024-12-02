@@ -13,6 +13,7 @@ data class Item(
     val description: String,
     val userId: Int,
     val location: String,
+    val imageUrl: String,
     val status: Boolean = false,
     val dateCreated: Date
 )

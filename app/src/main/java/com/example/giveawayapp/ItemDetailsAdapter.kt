@@ -3,6 +3,7 @@ package com.example.giveawayapp
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.giveawayapp.databinding.ItemsLayoutBinding
 import com.example.giveawayapp.models.Item
 import com.example.giveawayapp.utils.DateUtils
@@ -42,6 +43,13 @@ class ItemDetailsAdapter(
             textViewDescriptionContent.text = currentItem.description
             textViewLocation.text = currentItem.location
             textViewDate.text = formattedDate
+
+            println("image view URL: ${currentItem.imageUrl}")
+
+            Glide.with(imageViewItem.context)
+                .load(currentItem.imageUrl)
+                .error(R.drawable.baseline_broken_image_24)
+                .into(imageViewItem)
 
             itemCardView.setOnClickListener {
                 onCardClick(currentItem)

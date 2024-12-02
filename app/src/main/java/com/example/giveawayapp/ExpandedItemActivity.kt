@@ -6,6 +6,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
+import com.bumptech.glide.Glide
 import com.example.giveawayapp.controllers.ExpandedItemActivityController
 import com.example.giveawayapp.data.AppDatabase
 import com.example.giveawayapp.databinding.ActivityExpandedItemBinding
@@ -82,6 +83,11 @@ class ExpandedItemActivity : BottomNavigationActivity()
             textViewDate.text = formattedDate
             textViewLocation.text = item.location
             textViewDescription.text = item.description
+
+            Glide.with(imageViewItemImage.context)
+                .load(item.imageUrl)
+                .error(R.drawable.baseline_broken_image_24)
+                .into(imageViewItemImage)
         }
     }
 }

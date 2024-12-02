@@ -16,6 +16,7 @@ class MyItemsActivityController(
         itemCategory: String?,
         description: String,
         location: String,
+        imageUrl: String,
         userId: Int,
     ): Boolean
     {
@@ -32,6 +33,7 @@ class MyItemsActivityController(
                 description = description,
                 location = location,
                 userId = userId,
+                imageUrl = imageUrl,
                 dateCreated = dateCreated
             )
             itemDAO.insert(newItem)

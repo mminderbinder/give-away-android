@@ -65,14 +65,15 @@ class MyItemsActivity : BottomNavigationActivity()
                 val title = editTextTitle.text.toString().trim()
                 val location = editTextLocation.text.toString().trim()
                 val description = editTextDescription.text.toString().trim()
+                val imageUrl = editTextImageUrl.text.toString().trim()
                 val userId = sharedPreferences.getInt("USER_ID", -1)
 
-                createItem(title, location, description, userId)
+                createItem(title, location, description, userId, imageUrl)
             }
         }
     }
 
-    private fun createItem(title: String, location: String, description: String, userId: Int)
+    private fun createItem(title: String, location: String, description: String, userId: Int, imageUrl: String)
     {
         lifecycleScope.launch {
             if (!validateInputs(title, location, description))
@@ -85,7 +86,8 @@ class MyItemsActivity : BottomNavigationActivity()
                 itemCategory = selectedCategory,
                 description = description,
                 location = location,
-                userId = userId
+                userId = userId,
+                imageUrl = imageUrl
             )
             if (success)
             {
