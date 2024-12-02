@@ -55,12 +55,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewTitle">
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.3" />
 
         <TextView
             android:id="@+id/textViewListingTitle"
@@ -69,30 +63,31 @@
             android:gravity="center"
             android:text="Listing Title"
             android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textViewLocation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:gravity="center"
+            android:text="Toronto, Ontario"
+            android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewListingTitle" />
 
         <ImageView
             android:id="@+id/imageViewLocationIcon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:src="@drawable/baseline_location_pin_24"
-            app:layout_constraintTop_toBottomOf="@id/textViewListingTitle"
-            app:layout_constraintEnd_toStartOf="@id/guideline" />
-
-        <TextView
-            android:id="@+id/textViewLocation"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:gravity="center"
-            android:text="Toronto, Ontario"
-            android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
+            android:src="@drawable/baseline_location_pin_24"
+            app:layout_constraintTop_toBottomOf="@id/textViewLocation"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/textViewListingTitle" />
+            app:layout_constraintEnd_toEndOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
