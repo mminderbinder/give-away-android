@@ -10,7 +10,7 @@ import com.example.giveawayapp.databinding.ActivityMainBinding
 class MainActivity : BottomNavigationActivity()
 {
     private lateinit var binding: ActivityMainBinding
-    private lateinit var mainActivityController: MainActivityController
+    private lateinit var controller: MainActivityController
     override fun onCreate(savedInstanceState: Bundle?)
     {
         super.onCreate(savedInstanceState)
@@ -25,13 +25,11 @@ class MainActivity : BottomNavigationActivity()
 
         with(binding) {
 
-            // TODO: Centralize initialization
-            val sharedPreferences = getSharedPreferences(
-                "user_prefs",
-                MODE_PRIVATE
+            setUpBottomNavigation(
+                bottomNavigation,
+                R.id.navigation_home,
+                getSharedPreferences("user_prefs", MODE_PRIVATE)
             )
-
-            setUpBottomNavigation(bottomNavigation, R.id.navigation_home, sharedPreferences)
         }
     }
 }

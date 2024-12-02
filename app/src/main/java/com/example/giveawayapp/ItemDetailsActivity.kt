@@ -1,5 +1,6 @@
 package com.example.giveawayapp
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.core.view.ViewCompat
@@ -13,7 +14,7 @@ import kotlinx.coroutines.launch
 
 class ItemDetailsActivity : BottomNavigationActivity()
 {
-    private lateinit var itemDetailsActivityController: ItemDetailsActivityController
+    private lateinit var controller: ItemDetailsActivityController
     private lateinit var binding: ActivitySearchItemsBinding
     private lateinit var adapter: ItemDetailsAdapter
 
@@ -29,21 +30,19 @@ class ItemDetailsActivity : BottomNavigationActivity()
             insets
         }
 
-        // TODO: Centralize initialization
-        val sharedPreferences = getSharedPreferences(
-            "user_prefs",
-            MODE_PRIVATE
-        )
-
-        adapter = ItemDetailsAdapter(emptyList())
-
         val itemDAO = AppDatabase.getDatabase(this).itemDao()
-        itemDetailsActivityController = ItemDetailsActivityController(itemDAO)
 
+        controller = ItemDetailsActivityController(itemDAO)
+
+        setUpAdapter()
 
         with(binding) {
 
-            setUpBottomNavigation(bottomNavigation, R.id.navigation_search, sharedPreferences)
+            setUpBottomNavigation(
+                bottomNavigation,
+                R.id.navigation_search,
+                getSharedPreferences("user_prefs", MODE_PRIVATE)
+            )
             itemRecyclerView.adapter = adapter
             itemRecyclerView.layoutManager = LinearLayoutManager(this@ItemDetailsActivity)
 
@@ -51,13 +50,25 @@ class ItemDetailsActivity : BottomNavigationActivity()
         }
     }
 
+    private fun setUpAdapter()
+    {
+        adapter = ItemDetailsAdapter(
+            items = emptyList(),
+            onCardClick = { item ->
+                val intent = Intent(this@ItemDetailsActivity, ExpandedItemActivity::class.java)
+                intent.putExtra("itemId", item.itemId)
+                startActivity(intent)
+
+            }
+        )
+    }
 
     private fun getItemList()
     {
         lifecycleScope.launch {
 
             val userId = getSharedPreferences("user_prefs", MODE_PRIVATE).getInt("USER_ID", -1)
-            val itemsList = itemDetailsActivityController.getItemList(userId)
+            val itemsList = controller.getItemList(userId)
             adapter.getItemList(itemsList)
         }
     }

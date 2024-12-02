@@ -17,7 +17,7 @@ import kotlinx.coroutines.launch
 class RegistrationActivity : AppCompatActivity()
 {
     private lateinit var binding: ActivityRegistrationBinding
-    private lateinit var registrationActivityController: RegistrationActivityController
+    private lateinit var controller: RegistrationActivityController
     private lateinit var sharedPreferences: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?)
@@ -37,7 +37,7 @@ class RegistrationActivity : AppCompatActivity()
         sharedPreferences =
             getSharedPreferences("user_prefs", MODE_PRIVATE)
 
-        registrationActivityController = RegistrationActivityController(userDAO, sharedPreferences)
+        controller = RegistrationActivityController(userDAO, sharedPreferences)
 
         with(binding) {
             toolbar.setNavigationOnClickListener {
@@ -75,7 +75,7 @@ class RegistrationActivity : AppCompatActivity()
                 return@launch
             }
 
-            val success = registrationActivityController.registerUser(
+            val success = controller.registerUser(
                 username = username,
                 email = email,
                 password = password
@@ -129,7 +129,7 @@ class RegistrationActivity : AppCompatActivity()
                 false
             }
 
-            registrationActivityController.isEmailTaken(email) ->
+            controller.isEmailTaken(email) ->
             {
                 Toast.makeText(
                     this@RegistrationActivity,
@@ -139,7 +139,7 @@ class RegistrationActivity : AppCompatActivity()
                 false
             }
 
-            registrationActivityController.isUsernameTaken(username) ->
+            controller.isUsernameTaken(username) ->
             {
                 Toast.makeText(this@RegistrationActivity, "Username is taken", Toast.LENGTH_SHORT)
                     .show()

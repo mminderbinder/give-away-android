@@ -17,7 +17,7 @@ import kotlinx.coroutines.launch
 class LoginActivity : AppCompatActivity()
 {
     private lateinit var binding: ActivityLoginBinding
-    private lateinit var loginActivityController: LoginActivityController
+    private lateinit var controller: LoginActivityController
     private lateinit var sharedPreferences: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?)
@@ -34,11 +34,11 @@ class LoginActivity : AppCompatActivity()
 
         val userDao = AppDatabase.getDatabase(this).userDao()
 
-        // TODO: Centralize initialization
         sharedPreferences =
             getSharedPreferences("user_prefs", MODE_PRIVATE)
 
-        loginActivityController = LoginActivityController(userDao, sharedPreferences)
+        controller = LoginActivityController(userDao, sharedPreferences)
+
         isUserLoggedIn()
 
         with(binding) {
@@ -65,7 +65,7 @@ class LoginActivity : AppCompatActivity()
                 return@launch
             }
 
-            val success = loginActivityController.loginUser(email, password)
+            val success = controller.loginUser(email, password)
             if (success)
             {
                 Toast.makeText(this@LoginActivity, "Login Successful", Toast.LENGTH_SHORT).show()

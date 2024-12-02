@@ -7,16 +7,16 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.example.giveawayapp.models.Item
 import com.example.giveawayapp.models.User
+import com.example.giveawayapp.utils.DateConverter
 import com.example.giveawayapp.utils.ItemCategoryConverter
 
 @Database(
     entities = [User::class, Item::class],
-    version = 5
+    version = 6
 )
-@TypeConverters(ItemCategoryConverter::class)
+@TypeConverters(ItemCategoryConverter::class, DateConverter::class)
 abstract class AppDatabase : RoomDatabase()
 {
-
     abstract fun userDao(): UserDAO
     abstract fun itemDao(): ItemDAO
 

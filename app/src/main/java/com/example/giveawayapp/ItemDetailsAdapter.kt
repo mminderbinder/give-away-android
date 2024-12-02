@@ -5,8 +5,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.giveawayapp.databinding.ItemsLayoutBinding
 import com.example.giveawayapp.models.Item
+import com.example.giveawayapp.utils.DateUtils
 
-class ItemDetailsAdapter(private var items: List<Item>) :
+class ItemDetailsAdapter(
+    private var items: List<Item>,
+    private val onCardClick: (Item) -> Unit
+) :
     RecyclerView.Adapter<ItemDetailsAdapter.ViewHolder>()
 {
 
@@ -31,10 +35,17 @@ class ItemDetailsAdapter(private var items: List<Item>) :
         val currentItem = items[position]
         with(holder.binding) {
 
+            val formattedDate = DateUtils.formatDate(currentItem.dateCreated)
+
             textViewTitle.text = currentItem.title
             textViewCategory.text = currentItem.itemCategory.name
             textViewDescriptionContent.text = currentItem.description
             textViewLocation.text = currentItem.location
+            textViewDate.text = formattedDate
+
+            itemCardView.setOnClickListener {
+                onCardClick(currentItem)
+            }
         }
     }
 

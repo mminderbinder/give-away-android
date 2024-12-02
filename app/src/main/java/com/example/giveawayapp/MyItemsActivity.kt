@@ -17,7 +17,7 @@ class MyItemsActivity : BottomNavigationActivity()
 {
     private lateinit var binding: ActivityMyItemsBinding
     private var selectedCategory: String? = null
-    private lateinit var myItemsActivityController: MyItemsActivityController
+    private lateinit var controller: MyItemsActivityController
 
     override fun onCreate(savedInstanceState: Bundle?)
     {
@@ -39,7 +39,7 @@ class MyItemsActivity : BottomNavigationActivity()
             )
 
             val itemDAO = AppDatabase.getDatabase(this@MyItemsActivity).itemDao()
-            myItemsActivityController = MyItemsActivityController(itemDAO)
+            controller = MyItemsActivityController(itemDAO)
             setUpBottomNavigation(bottomNavigation, R.id.navigation_items, sharedPreferences)
 
             val dropdownCategoryMenu = dropdownCategory
@@ -54,7 +54,7 @@ class MyItemsActivity : BottomNavigationActivity()
 
             dropdownCategoryMenu.setAdapter(adapter)
 
-            dropdownCategoryMenu.setOnItemClickListener { parent, view, position, id ->
+            dropdownCategoryMenu.setOnItemClickListener { _, _, position, _ ->
 
                 selectedCategory = categories[position]
 
@@ -80,7 +80,7 @@ class MyItemsActivity : BottomNavigationActivity()
                 return@launch
             }
 
-            val success = myItemsActivityController.addItem(
+            val success = controller.addItem(
                 title = title,
                 itemCategory = selectedCategory,
                 description = description,

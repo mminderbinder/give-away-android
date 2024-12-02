@@ -20,6 +20,9 @@ interface ItemDAO
     @Delete
     suspend fun delete(item: Item)
 
+    @Query("SELECT * FROM items WHERE itemId = :itemId LIMIT 1")
+    suspend fun getItem(itemId: Int): Item
+
     @Query("SELECT * FROM items WHERE userId != :id")
     suspend fun getItemsOfOtherUsers(id: Int): List<Item>
 

@@ -9,7 +9,7 @@ open class BottomNavigationActivity : AppCompatActivity()
 {
     protected fun setUpBottomNavigation(
         bottomNavigationView: BottomNavigationView,
-        selectedItemId: Int,
+        selectedItemId: Int = 0,
         sharedPreferences: SharedPreferences
     )
     {
