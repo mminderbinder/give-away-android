@@ -17,6 +17,7 @@ class MyItemsActivity : BottomNavigationActivity()
 {
     private lateinit var binding: ActivityMyItemsBinding
     private var selectedCategory: String? = null
+    private var editableItemId: Int = -1
     private lateinit var controller: MyItemsActivityController
 
     override fun onCreate(savedInstanceState: Bundle?)
@@ -30,6 +31,9 @@ class MyItemsActivity : BottomNavigationActivity()
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+        editableItemId = intent.getIntExtra("itemId", -1)
+
 
         with(binding) {
 
@@ -52,6 +56,11 @@ class MyItemsActivity : BottomNavigationActivity()
                 categories
             )
 
+            if (editableItemId != -1)
+            {
+                loadItem(editableItemId)
+            }
+
             dropdownCategoryMenu.setAdapter(adapter)
 
             dropdownCategoryMenu.setOnItemClickListener { _, _, position, _ ->
@@ -62,21 +71,37 @@ class MyItemsActivity : BottomNavigationActivity()
 
             buttonSubmit.setOnClickListener {
 
+                editableItemId = intent.getIntExtra("itemId", -1)
+
                 val title = editTextTitle.text.toString().trim()
                 val location = editTextLocation.text.toString().trim()
                 val description = editTextDescription.text.toString().trim()
                 val imageUrl = editTextImageUrl.text.toString().trim()
                 val userId = sharedPreferences.getInt("USER_ID", -1)
 
-                createItem(title, location, description, userId, imageUrl)
+                if (editableItemId != -1)
+                {
+                    updateItem(title, location, description, imageUrl)
+
+                }
+                else
+                {
+                    createItem(title, location, description, userId, imageUrl)
+                }
             }
         }
     }
 
-    private fun createItem(title: String, location: String, description: String, userId: Int, imageUrl: String)
+    private fun createItem(
+        title: String,
+        location: String,
+        description: String,
+        userId: Int,
+        imageUrl: String
+    )
     {
         lifecycleScope.launch {
-            if (!validateInputs(title, location, description))
+            if (!validateInputs(title, location, description, imageUrl))
             {
                 return@launch
             }
@@ -107,12 +132,89 @@ class MyItemsActivity : BottomNavigationActivity()
         }
     }
 
+    private fun loadItem(updatedItemId: Int)
+    {
 
-    private fun validateInputs(title: String, location: String, description: String): Boolean
+        lifecycleScope.launch {
+
+            val item = controller.getItemById(updatedItemId)
+
+            if (item != null)
+            {
+                with(binding) {
+
+                    editTextTitle.setText(item.title)
+                    editTextLocation.setText(item.location)
+                    editTextDescription.setText(item.description)
+                    editTextImageUrl.setText(item.imageUrl)
+                }
+            }
+            else
+            {
+                Toast.makeText(
+                    this@MyItemsActivity,
+                    "Failed to load item details. Please try again",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
+    }
+
+    private fun updateItem(
+        title: String,
+        location: String,
+        description: String,
+        imageUrl: String
+    )
+    {
+        lifecycleScope.launch {
+
+            val item = controller.getItemById(editableItemId)
+
+            if (!validateInputs(title, location, description, imageUrl))
+            {
+                return@launch
+            }
+
+            val success = controller.updateItem(
+                item = item,
+                title = title,
+                itemCategory = selectedCategory,
+                description = description,
+                location = location,
+                imageUrl = imageUrl
+            )
+            if (success)
+            {
+                startActivity(Intent(this@MyItemsActivity, MainActivity::class.java))
+
+                Toast.makeText(
+                    this@MyItemsActivity,
+                    "Item updated successfully",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+            else
+            {
+                Toast.makeText(
+                    this@MyItemsActivity,
+                    "Failed to update item. Please try again",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
+    }
+
+    private fun validateInputs(
+        title: String,
+        location: String,
+        description: String,
+        imageUrl: String
+    ): Boolean
     {
         return when
         {
-            title.isBlank() || location.isBlank() || description.isBlank() || selectedCategory.isNullOrEmpty() ->
+            title.isBlank() || location.isBlank() || description.isBlank() || imageUrl.isBlank() || selectedCategory.isNullOrEmpty() ->
             {
                 Toast.makeText(this, "Please fill out all fields", Toast.LENGTH_SHORT).show()
                 false

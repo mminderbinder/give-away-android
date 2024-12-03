@@ -47,6 +47,60 @@ class MyItemsActivityController(
         }
     }
 
+    suspend fun updateItem(
+        item: Item?,
+        title: String,
+        itemCategory: String?,
+        description: String,
+        location: String,
+        imageUrl: String
+    ): Boolean
+    {
+        return try
+        {
+            val categoryToEnum =
+                ItemCategory.valueOf(itemCategory?.uppercase(Locale.ROOT) ?: "OTHER")
+
+            val updatedItem = item?.copy(
+                title = title,
+                itemCategory = categoryToEnum,
+                description = description,
+                location = location,
+                imageUrl = imageUrl
+            )
+
+            if (updatedItem != null)
+            {
+                itemDAO.update(updatedItem)
+            }
+
+            Log.d(TAG, "updateItem:success")
+            true
+
+        }
+        catch (e: Exception)
+        {
+            Log.e(TAG, "updateItem:failed")
+            false
+        }
+    }
+
+    suspend fun getItemById(itemId: Int): Item?
+    {
+        return try
+        {
+            val item = itemDAO.getItem(itemId)
+            Log.d(TAG, "getItemById:success")
+            item
+        }
+        catch (e: Exception)
+        {
+            Log.d(TAG, "getItemBYId:failure")
+            null
+        }
+    }
+
+
     companion object
     {
         private const val TAG = "MyItemsActivityController"

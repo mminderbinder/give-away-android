@@ -61,7 +61,9 @@ class MainActivity : BottomNavigationActivity()
         adapter = ItemDetailsAdapter(
             emptyList(),
             onCardClick = { item ->
-
+               val intent = Intent(this@MainActivity, MyItemsActivity::class.java)
+                intent.putExtra("itemId", item.itemId)
+                startActivity(intent)
             }
         )
     }
@@ -69,7 +71,6 @@ class MainActivity : BottomNavigationActivity()
     private fun getUserItems()
     {
         val userId = getSharedPreferences("user_prefs", MODE_PRIVATE).getInt("USER_ID", -1)
-        println("User ID: $userId")
 
         lifecycleScope.launch {
             val userItems = controller.getUserItems(userId)
