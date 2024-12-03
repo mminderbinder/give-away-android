@@ -13,6 +13,7 @@ import com.example.giveawayapp.data.AppDatabase
 import com.example.giveawayapp.databinding.ActivityExpandedItemBinding
 import com.example.giveawayapp.models.Item
 import com.example.giveawayapp.utils.DateUtils
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.launch
 
 class ExpandedItemActivity : BottomNavigationActivity()
@@ -49,6 +50,9 @@ class ExpandedItemActivity : BottomNavigationActivity()
                 bottomNavigationView = bottomNavigation,
                 sharedPreferences = getSharedPreferences("user_prefs", MODE_PRIVATE)
             )
+            buttonContact.setOnClickListener {
+                showContactUserDialog()
+            }
         }
     }
 
@@ -78,7 +82,7 @@ class ExpandedItemActivity : BottomNavigationActivity()
         with(binding) {
 
             val formattedDate = DateUtils.formatDate(item.dateCreated)
-            
+
             textViewListingTitle.text = item.title
             textViewDate.text = formattedDate
             textViewLocation.text = item.location
@@ -93,12 +97,29 @@ class ExpandedItemActivity : BottomNavigationActivity()
 
         }
     }
-    private fun setUpFullScreenImage(item: Item) {
+
+    private fun setUpFullScreenImage(item: Item)
+    {
 
         binding.imageViewItemImage.setOnClickListener {
             val intent = Intent(this, FullScreenImageActivity::class.java)
             intent.putExtra("imageUrl", item.imageUrl)
             startActivity(intent)
         }
+    }
+
+    private fun showContactUserDialog()
+    {
+
+        MaterialAlertDialogBuilder(this)
+            .setTitle("Contact User")
+            .setMessage("How would you like to contact the user?")
+            .setNeutralButton("Email") { dialog, _ ->
+                dialog.dismiss()
+            }
+            .setNegativeButton("Cancel") { dialog, _ ->
+                dialog.dismiss()
+            }
+            .show()
     }
 }

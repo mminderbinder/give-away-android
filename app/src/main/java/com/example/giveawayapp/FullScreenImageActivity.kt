@@ -34,7 +34,6 @@ class FullScreenImageActivity : AppCompatActivity()
                 .load(imageUrl)
                 .error(R.drawable.baseline_broken_image_24)
                 .into(imageViewItemLarge)
-
         }
     }
 }

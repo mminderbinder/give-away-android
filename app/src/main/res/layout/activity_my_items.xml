@@ -16,7 +16,7 @@
             android:id="@+id/textViewTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="New GiveAway"
+            android:text="GiveAway"
             android:textAppearance="@style/TextAppearance.Material3.HeadlineMedium"
             app:layout_constraintBottom_toTopOf="@+id/textLayoutTitle"
             app:layout_constraintEnd_toEndOf="parent"

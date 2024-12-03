@@ -61,7 +61,7 @@ class MainActivity : BottomNavigationActivity()
         adapter = ItemDetailsAdapter(
             emptyList(),
             onCardClick = { item ->
-               val intent = Intent(this@MainActivity, MyItemsActivity::class.java)
+                val intent = Intent(this@MainActivity, MyItemsActivity::class.java)
                 intent.putExtra("itemId", item.itemId)
                 startActivity(intent)
             }
@@ -87,12 +87,11 @@ class MainActivity : BottomNavigationActivity()
                             Toast.LENGTH_SHORT
                         ).show()
 
-                        itemRecyclerView.visibility = View.GONE
                     }
 
                     userItems.isEmpty() ->
                     {
-                        itemRecyclerView.visibility = View.GONE
+                        viewGroup.visibility = View.VISIBLE
                     }
 
                     else ->
