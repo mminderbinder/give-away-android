@@ -14,7 +14,6 @@ class ItemDetailsAdapter(
 ) :
     RecyclerView.Adapter<ItemDetailsAdapter.ViewHolder>()
 {
-
     class ViewHolder(val binding: ItemsLayoutBinding) :
         RecyclerView.ViewHolder(binding.root)
 
@@ -27,7 +26,6 @@ class ItemDetailsAdapter(
         )
         return ViewHolder(binding)
     }
-
 
     override fun getItemCount() = items.size
 
@@ -43,7 +41,7 @@ class ItemDetailsAdapter(
             textViewDescription.text = currentItem.description
             textViewLocation.text = currentItem.location
             textViewDate.text = formattedDate
-            
+
             Glide.with(imageViewItem.context)
                 .load(currentItem.imageUrl)
                 .error(R.drawable.baseline_broken_image_24)

@@ -55,16 +55,7 @@ open class BottomNavigationActivity : AppCompatActivity()
                     }
                     true
                 }
-
-//                R.id.navigation_logout ->
-//                {
-//                    startActivity(Intent(this, LoginActivity::class.java))
-//                    sharedPreferences.edit()
-//                        .remove("USER_ID")
-//                        .apply()
-//                    true
-//                }
-
+                
                 else -> false
             }
         }

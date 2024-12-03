@@ -84,6 +84,24 @@ class MyItemsActivityController(
         }
     }
 
+    suspend fun deleteItem(item: Item?): Boolean
+    {
+        return try
+        {
+            if (item != null)
+            {
+                itemDAO.delete(item)
+                Log.d(TAG, "deleteItem:success")
+            }
+            true
+        }
+        catch (e: Exception)
+        {
+            Log.e(TAG, "deleteItem:failure", e)
+            false
+        }
+    }
+
     suspend fun getItemById(itemId: Int): Item?
     {
         return try
@@ -98,7 +116,6 @@ class MyItemsActivityController(
             null
         }
     }
-
 
     companion object
     {

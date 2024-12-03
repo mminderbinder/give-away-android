@@ -2,6 +2,7 @@ package com.example.giveawayapp
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -11,6 +12,7 @@ import androidx.lifecycle.lifecycleScope
 import com.example.giveawayapp.controllers.MyItemsActivityController
 import com.example.giveawayapp.data.AppDatabase
 import com.example.giveawayapp.databinding.ActivityMyItemsBinding
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.launch
 
 class MyItemsActivity : BottomNavigationActivity()
@@ -59,6 +61,7 @@ class MyItemsActivity : BottomNavigationActivity()
             if (editableItemId != -1)
             {
                 loadItem(editableItemId)
+                textViewDelete.visibility = View.VISIBLE
             }
 
             dropdownCategoryMenu.setAdapter(adapter)
@@ -82,11 +85,61 @@ class MyItemsActivity : BottomNavigationActivity()
                 if (editableItemId != -1)
                 {
                     updateItem(title, location, description, imageUrl)
-
                 }
                 else
                 {
                     createItem(title, location, description, userId, imageUrl)
+                }
+            }
+
+            deleteItem(editableItemId)
+        }
+    }
+
+    private fun deleteItem(itemId: Int)
+    {
+        lifecycleScope.launch {
+            if (editableItemId != -1)
+            {
+                val item = controller.getItemById(itemId)
+
+                binding.textViewDelete.setOnClickListener {
+
+                    MaterialAlertDialogBuilder(this@MyItemsActivity)
+                        .setTitle("Confirm Delete")
+                        .setMessage("This action cannot be undone!")
+                        .setPositiveButton("Delete") { dialog, _ ->
+                            lifecycleScope.launch {
+                                val success = controller.deleteItem(item)
+                                if (success)
+                                {
+                                    Toast.makeText(
+                                        this@MyItemsActivity,
+                                        "Item deleted successfully",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                    startActivity(
+                                        Intent(
+                                            this@MyItemsActivity,
+                                            MainActivity::class.java
+                                        )
+                                    )
+                                }
+                                else
+                                {
+                                    Toast.makeText(
+                                        this@MyItemsActivity,
+                                        "Failed to delete item. Please try again",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                }
+                            }
+                            dialog.dismiss()
+                        }
+                        .setNegativeButton("Cancel") { dialog, _ ->
+                            dialog.dismiss()
+                        }
+                        .show()
                 }
             }
         }
