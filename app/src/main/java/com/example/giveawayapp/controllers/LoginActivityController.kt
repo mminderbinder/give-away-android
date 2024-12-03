@@ -2,7 +2,7 @@ package com.example.giveawayapp.controllers
 
 import android.content.SharedPreferences
 import com.example.giveawayapp.data.UserDAO
-import java.security.MessageDigest
+import com.example.giveawayapp.utils.PasswordUtils
 
 class LoginActivityController(
     private val userDAO: UserDAO,
@@ -12,8 +12,9 @@ class LoginActivityController(
     suspend fun loginUser(email: String, password: String): Boolean
     {
         val user = userDAO.getEmail(email) ?: return false
-        val hashedPassword = hashPassword(password)
 
+        val hashedPassword = PasswordUtils.hashPassword(password)
+        
         return if (hashedPassword == user.password)
         {
             sharedPreferences.edit()
@@ -25,12 +26,5 @@ class LoginActivityController(
         {
             false
         }
-    }
-
-    private fun hashPassword(password: String): String
-    {
-        val digest = MessageDigest.getInstance("SHA-256")
-        val hashedBytes = digest.digest(password.toByteArray())
-        return hashedBytes.joinToString("") { "%02x".format(it) }
     }
 }

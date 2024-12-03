@@ -8,6 +8,19 @@ class ProfileActivityController(
     private val userDAO: UserDAO
 )
 {
+    suspend fun updateUserEmail(email: String)
+    {
+
+
+    }
+
+    suspend fun updateUserPassword(password: String)
+    {
+
+
+    }
+
+
     suspend fun getUserById(userId: Int): User?
     {
 

@@ -103,6 +103,7 @@ class ExpandedItemActivity : BottomNavigationActivity()
         binding.imageViewItemImage.setOnClickListener {
             val intent = Intent(this, FullScreenImageActivity::class.java)
             intent.putExtra("imageUrl", item.imageUrl)
+            intent.putExtra("itemDescription", item.description)
             startActivity(intent)
         }
     }

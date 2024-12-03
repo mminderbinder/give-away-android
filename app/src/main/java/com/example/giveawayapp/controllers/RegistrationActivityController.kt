@@ -4,7 +4,7 @@ import android.content.SharedPreferences
 import android.util.Log
 import com.example.giveawayapp.data.UserDAO
 import com.example.giveawayapp.models.User
-import java.security.MessageDigest
+import com.example.giveawayapp.utils.PasswordUtils
 
 class RegistrationActivityController(
     private val userDAO: UserDAO,
@@ -15,7 +15,7 @@ class RegistrationActivityController(
     {
         return try
         {
-            val hashedPassword = hashPassword(password)
+            val hashedPassword = PasswordUtils.hashPassword(password)
 
             val newUser = User(
                 username = username,
@@ -49,13 +49,6 @@ class RegistrationActivityController(
     {
         val user = userDAO.getUsername(username)
         return user != null
-    }
-
-    private fun hashPassword(password: String): String
-    {
-        val digest = MessageDigest.getInstance("SHA-256")
-        val hashedBytes = digest.digest(password.toByteArray())
-        return hashedBytes.joinToString("") { "%02x".format(it) }
     }
 
     companion object
