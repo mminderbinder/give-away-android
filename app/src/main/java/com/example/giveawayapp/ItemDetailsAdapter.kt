@@ -40,12 +40,10 @@ class ItemDetailsAdapter(
 
             textViewTitle.text = currentItem.title
             textViewCategory.text = currentItem.itemCategory.name
-            textViewDescriptionContent.text = currentItem.description
+            textViewDescription.text = currentItem.description
             textViewLocation.text = currentItem.location
             textViewDate.text = formattedDate
-
-            println("image view URL: ${currentItem.imageUrl}")
-
+            
             Glide.with(imageViewItem.context)
                 .load(currentItem.imageUrl)
                 .error(R.drawable.baseline_broken_image_24)

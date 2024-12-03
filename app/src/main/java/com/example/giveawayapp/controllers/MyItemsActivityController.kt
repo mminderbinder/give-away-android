@@ -5,7 +5,6 @@ import com.example.giveawayapp.data.ItemDAO
 import com.example.giveawayapp.models.Item
 import com.example.giveawayapp.models.ItemCategory
 import java.util.Date
-import java.util.Locale
 
 class MyItemsActivityController(
     private val itemDAO: ItemDAO
@@ -23,7 +22,7 @@ class MyItemsActivityController(
         return try
         {
             val categoryToEnum =
-                ItemCategory.valueOf(itemCategory?.uppercase(Locale.ROOT) ?: "OTHER")
+                ItemCategory.valueOf(itemCategory ?: "Other")
 
             val dateCreated = Date()
 
@@ -59,7 +58,7 @@ class MyItemsActivityController(
         return try
         {
             val categoryToEnum =
-                ItemCategory.valueOf(itemCategory?.uppercase(Locale.ROOT) ?: "OTHER")
+                ItemCategory.valueOf(itemCategory ?: "Other")
 
             val updatedItem = item?.copy(
                 title = title,

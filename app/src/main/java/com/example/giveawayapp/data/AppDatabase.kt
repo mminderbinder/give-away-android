@@ -12,7 +12,7 @@ import com.example.giveawayapp.utils.ItemCategoryConverter
 
 @Database(
     entities = [User::class, Item::class],
-    version = 8
+    version = 9
 )
 @TypeConverters(ItemCategoryConverter::class, DateConverter::class)
 abstract class AppDatabase : RoomDatabase()

@@ -147,6 +147,7 @@ class MyItemsActivity : BottomNavigationActivity()
                     editTextLocation.setText(item.location)
                     editTextDescription.setText(item.description)
                     editTextImageUrl.setText(item.imageUrl)
+                    dropdownCategory.setText(item.itemCategory.name, false)
                 }
             }
             else
