@@ -44,7 +44,7 @@ class MyItemsActivity : BottomNavigationActivity()
 
             val itemDAO = AppDatabase.getDatabase(this@MyItemsActivity).itemDao()
             controller = MyItemsActivityController(itemDAO)
-            setUpBottomNavigation(bottomNavigation, R.id.navigation_items, sharedPreferences)
+            setUpBottomNavigation(bottomNavigation, R.id.navigation_items)
 
             val dropdownCategoryMenu = dropdownCategory
 
@@ -134,20 +134,19 @@ class MyItemsActivity : BottomNavigationActivity()
 
     private fun loadItem(updatedItemId: Int)
     {
-
         lifecycleScope.launch {
 
             val item = controller.getItemById(updatedItemId)
 
             if (item != null)
             {
+
                 with(binding) {
 
                     editTextTitle.setText(item.title)
                     editTextLocation.setText(item.location)
                     editTextDescription.setText(item.description)
                     editTextImageUrl.setText(item.imageUrl)
-                    dropdownCategory.setText(item.itemCategory.name, false)
                 }
             }
             else

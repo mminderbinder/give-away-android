@@ -34,9 +34,7 @@ class ItemDetailsActivity : BottomNavigationActivity()
         val itemDAO = AppDatabase.getDatabase(this).itemDao()
 
         controller = ItemDetailsActivityController(itemDAO)
-
-        val sharedPreferences = getSharedPreferences("user_prefs", MODE_PRIVATE)
-
+        
         setUpAdapter()
 
         with(binding) {
@@ -44,8 +42,8 @@ class ItemDetailsActivity : BottomNavigationActivity()
             setUpBottomNavigation(
                 bottomNavigation,
                 R.id.navigation_search,
-                sharedPreferences
             )
+
             itemRecyclerView.adapter = adapter
             itemRecyclerView.layoutManager = LinearLayoutManager(this@ItemDetailsActivity)
 

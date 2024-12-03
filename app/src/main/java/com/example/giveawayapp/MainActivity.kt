@@ -31,6 +31,10 @@ class MainActivity : BottomNavigationActivity()
             insets
         }
 
+        val userId = getSharedPreferences("user_prefs", MODE_PRIVATE).getInt("USER_ID", -1)
+
+        println("Current User ID: $userId")
+
         val itemDAO = AppDatabase.getDatabase(this).itemDao()
 
         controller = MainActivityController(itemDAO)
@@ -41,8 +45,7 @@ class MainActivity : BottomNavigationActivity()
 
             setUpBottomNavigation(
                 bottomNavigation,
-                R.id.navigation_home,
-                getSharedPreferences("user_prefs", MODE_PRIVATE)
+                R.id.navigation_home
             )
 
             buttonAddItem.setOnClickListener {

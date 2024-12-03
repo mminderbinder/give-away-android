@@ -23,10 +23,4 @@
         android:enabled="true"
         android:icon="@drawable/baseline_person_24"
         android:title="Profile" />
-
-    <item
-        android:id="@+id/navigation_logout"
-        android:enabled="true"
-        android:icon="@drawable/baseline_logout_24"
-        android:title="Profile" />
 </menu>

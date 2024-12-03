@@ -25,5 +25,4 @@
         android:layout_height="match_parent"
         android:src="@drawable/baseline_broken_image_24"
         android:scaleType="fitCenter" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

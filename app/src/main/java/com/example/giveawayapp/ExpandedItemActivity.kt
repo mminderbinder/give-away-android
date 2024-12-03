@@ -47,8 +47,7 @@ class ExpandedItemActivity : BottomNavigationActivity()
             }
 
             setUpBottomNavigation(
-                bottomNavigationView = bottomNavigation,
-                sharedPreferences = getSharedPreferences("user_prefs", MODE_PRIVATE)
+                bottomNavigationView = bottomNavigation
             )
             buttonContact.setOnClickListener {
                 showContactUserDialog()
