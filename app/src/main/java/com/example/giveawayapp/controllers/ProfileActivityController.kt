@@ -20,7 +20,6 @@ class ProfileActivityController(
 
     }
 
-
     suspend fun getUserById(userId: Int): User?
     {
 

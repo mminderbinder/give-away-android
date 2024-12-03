@@ -108,10 +108,10 @@ class MyItemsActivity : BottomNavigationActivity()
                     MaterialAlertDialogBuilder(this@MyItemsActivity)
                         .setTitle("Confirm Delete")
                         .setMessage("This action cannot be undone!")
-                        .setPositiveButton("Cancel") { dialog, _ ->
+                        .setNegativeButton("Cancel") { dialog, _ ->
                             dialog.dismiss()
                         }
-                        .setNegativeButton("Delete") { dialog, _ ->
+                        .setPositiveButton("Delete") { dialog, _ ->
                             lifecycleScope.launch {
                                 val success = controller.deleteItem(item)
                                 if (success)
